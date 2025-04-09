@@ -19,7 +19,7 @@ const LeftSide = () => {
       icon: <FaBlog />
     }, {
       name: "Create Blog",
-      path: "/new-blog",
+      path: "/create-post",
       icon: <IoMdAddCircle />
     },
     {
