@@ -17,7 +17,24 @@ export const blogData = [
     isPublished: true,  // New field
     views: 1500,
     likes: 250,
-    comments: [],
+    comments: [
+      {
+        "name": "Alice Johnson",
+        "email": "alice@example.com",
+        "comment": "This is a great article! Very helpful and well-written."
+      },
+      {
+        "name": "Bob Smith",
+        "email": "bob.smith@example.com",
+        "comment": "I found this topic really interesting. Thanks for sharing!"
+      },
+      {
+        "name": "Charlie Davis",
+        "email": "charlie.d@example.com",
+        "comment": "Could you provide more details on the second point?"
+      }
+    ]
+    ,
   },
   {
     title: "What is the difference between var, let, and const?",
@@ -37,7 +54,24 @@ export const blogData = [
     isPublished: true,  // New field
     views: 1300,
     likes: 220,
-    comments: [],
+    comments: [
+      {
+        "name": "Alice Johnson",
+        "email": "alice@example.com",
+        "comment": "This is a great article! Very helpful and well-written."
+      },
+      {
+        "name": "Bob Smith",
+        "email": "bob.smith@example.com",
+        "comment": "I found this topic really interesting. Thanks for sharing!"
+      },
+      {
+        "name": "Charlie Davis",
+        "email": "charlie.d@example.com",
+        "comment": "Could you provide more details on the second point?"
+      }
+    ]
+    ,
   },
   {
     title: "What is the Virtual DOM in React?",
@@ -57,7 +91,24 @@ export const blogData = [
     isPublished: true,  // New field
     views: 1700,
     likes: 350,
-    comments: [],
+    comments: [
+      {
+        "name": "Alice Johnson",
+        "email": "alice@example.com",
+        "comment": "This is a great article! Very helpful and well-written."
+      },
+      {
+        "name": "Bob Smith",
+        "email": "bob.smith@example.com",
+        "comment": "I found this topic really interesting. Thanks for sharing!"
+      },
+      {
+        "name": "Charlie Davis",
+        "email": "charlie.d@example.com",
+        "comment": "Could you provide more details on the second point?"
+      }
+    ]
+    ,
   },
   {
     title: "What is Redux, and why is it used in React applications?",
@@ -77,7 +128,24 @@ export const blogData = [
     isPublished: true,  // New field
     views: 1800,
     likes: 370,
-    comments: [],
+    comments: [
+      {
+        "name": "Alice Johnson",
+        "email": "alice@example.com",
+        "comment": "This is a great article! Very helpful and well-written."
+      },
+      {
+        "name": "Bob Smith",
+        "email": "bob.smith@example.com",
+        "comment": "I found this topic really interesting. Thanks for sharing!"
+      },
+      {
+        "name": "Charlie Davis",
+        "email": "charlie.d@example.com",
+        "comment": "Could you provide more details on the second point?"
+      }
+    ]
+    ,
   },
   {
     title: "What is Redux, and why is it used in React applications?",
@@ -97,7 +165,24 @@ export const blogData = [
     isPublished: true,  // New field
     views: 1800,
     likes: 370,
-    comments: [],
+    comments: [
+      {
+        "name": "Alice Johnson",
+        "email": "alice@example.com",
+        "comment": "This is a great article! Very helpful and well-written."
+      },
+      {
+        "name": "Bob Smith",
+        "email": "bob.smith@example.com",
+        "comment": "I found this topic really interesting. Thanks for sharing!"
+      },
+      {
+        "name": "Charlie Davis",
+        "email": "charlie.d@example.com",
+        "comment": "Could you provide more details on the second point?"
+      }
+    ]
+    ,
   },
   {
     title: "What is Redux, and why is it used in React applications?",
@@ -117,7 +202,24 @@ export const blogData = [
     isPublished: true,  // New field
     views: 1800,
     likes: 370,
-    comments: [],
+    comments: [
+      {
+        "name": "Alice Johnson",
+        "email": "alice@example.com",
+        "comment": "This is a great article! Very helpful and well-written."
+      },
+      {
+        "name": "Bob Smith",
+        "email": "bob.smith@example.com",
+        "comment": "I found this topic really interesting. Thanks for sharing!"
+      },
+      {
+        "name": "Charlie Davis",
+        "email": "charlie.d@example.com",
+        "comment": "Could you provide more details on the second point?"
+      }
+    ]
+    ,
   },
   {
     title: "What is Redux, and why is it used in React applications?",
@@ -137,7 +239,24 @@ export const blogData = [
     isPublished: true,  // New field
     views: 1800,
     likes: 370,
-    comments: [],
+    comments: [
+      {
+        "name": "Alice Johnson",
+        "email": "alice@example.com",
+        "comment": "This is a great article! Very helpful and well-written."
+      },
+      {
+        "name": "Bob Smith",
+        "email": "bob.smith@example.com",
+        "comment": "I found this topic really interesting. Thanks for sharing!"
+      },
+      {
+        "name": "Charlie Davis",
+        "email": "charlie.d@example.com",
+        "comment": "Could you provide more details on the second point?"
+      }
+    ]
+    ,
   },
   {
     title: "What is Redux, and why is it used in React applications?",
@@ -157,7 +276,24 @@ export const blogData = [
     isPublished: true,  // New field
     views: 1800,
     likes: 370,
-    comments: [],
+    comments: [
+      {
+        "name": "Alice Johnson",
+        "email": "alice@example.com",
+        "comment": "This is a great article! Very helpful and well-written."
+      },
+      {
+        "name": "Bob Smith",
+        "email": "bob.smith@example.com",
+        "comment": "I found this topic really interesting. Thanks for sharing!"
+      },
+      {
+        "name": "Charlie Davis",
+        "email": "charlie.d@example.com",
+        "comment": "Could you provide more details on the second point?"
+      }
+    ]
+    ,
   },
   {
     title: "What is Redux, and why is it used in React applications?",
@@ -177,7 +313,24 @@ export const blogData = [
     isPublished: false,  // New field
     views: 1800,
     likes: 370,
-    comments: [],
+    comments: [
+      {
+        "name": "Alice Johnson",
+        "email": "alice@example.com",
+        "comment": "This is a great article! Very helpful and well-written."
+      },
+      {
+        "name": "Bob Smith",
+        "email": "bob.smith@example.com",
+        "comment": "I found this topic really interesting. Thanks for sharing!"
+      },
+      {
+        "name": "Charlie Davis",
+        "email": "charlie.d@example.com",
+        "comment": "Could you provide more details on the second point?"
+      }
+    ]
+    ,
   },
   {
     title: "What is Redux, and why is it used in React applications?",
@@ -197,7 +350,24 @@ export const blogData = [
     isPublished: true,  // New field
     views: 1800,
     likes: 370,
-    comments: [],
+    comments: [
+      {
+        "name": "Alice Johnson",
+        "email": "alice@example.com",
+        "comment": "This is a great article! Very helpful and well-written."
+      },
+      {
+        "name": "Bob Smith",
+        "email": "bob.smith@example.com",
+        "comment": "I found this topic really interesting. Thanks for sharing!"
+      },
+      {
+        "name": "Charlie Davis",
+        "email": "charlie.d@example.com",
+        "comment": "Could you provide more details on the second point?"
+      }
+    ]
+    ,
   },
   {
     title: "What is Redux, and why is it used in React applications?",
@@ -217,7 +387,24 @@ export const blogData = [
     isPublished: true,  // New field
     views: 1800,
     likes: 370,
-    comments: [],
+    comments: [
+      {
+        "name": "Alice Johnson",
+        "email": "alice@example.com",
+        "comment": "This is a great article! Very helpful and well-written."
+      },
+      {
+        "name": "Bob Smith",
+        "email": "bob.smith@example.com",
+        "comment": "I found this topic really interesting. Thanks for sharing!"
+      },
+      {
+        "name": "Charlie Davis",
+        "email": "charlie.d@example.com",
+        "comment": "Could you provide more details on the second point?"
+      }
+    ]
+    ,
   },
 
 ];

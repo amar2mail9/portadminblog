@@ -54,7 +54,7 @@ const AllCategory = () => {
             <section className="flex items-center justify-between bg-gray-800/90 font-semibold text-[14px] px-4 py-2 rounded-lg mb-4">
                 <div className="w-[15%]">
                     <div className='w-[60px] h-[60px] rounded-full border  bg-gray-600'>
-                        <img src="https://international-adviser.com/wp-content/uploads/2020/03/robo-AI-artifial-intelligence.jpg" alt="" className='w-full h-full  rounded-full object-cover object-center ' />
+                        <img loading='lazy' src="https://international-adviser.com/wp-content/uploads/2020/03/robo-AI-artifial-intelligence.jpg" alt="" className='w-full h-full  rounded-full object-cover object-center ' />
                     </div>
                 </div>
                 <div className="w-[25%]">

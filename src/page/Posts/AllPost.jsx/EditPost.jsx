@@ -4,51 +4,27 @@ import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css'; // Import default styling
 import 'react-quill/dist/quill.bubble.css'; // Import bubble theme CSS
 
-
-const CreatePost = () => {
+const EditPost = () => {
     const [title, setTitle] = useState('');
-    const [content, setContent] = useState(''); 
+    const [category, setCategory] = useState('');
+    const [content, setContent] = useState(''); // State to hold editor content
 
     const handleTitleChange = (e) => {
         setTitle(e.target.value);
     };
 
-
- 
-
-    const handleContentChange = (value) => {
-        setContent(value); 
+    const handleCategoryChange = (e) => {
+        setCategory(e.target.value);
     };
 
-    const handleSubmit = async (e) => {
+    const handleContentChange = (value) => {
+        setContent(value); // Update content when text editor content changes
+    };
+
+    const handleSubmit = (e) => {
         e.preventDefault();
-        console.log(localStorage.getItem("access-Token"))
-        try {
-            const res = await fetch(`${import.meta.env.VITE_API_URI}/blog/new`, {
-                method: "POST",
-                
-                headers: {
-                    'Content-Type': 'application/json',
-                    "Authorization":`Bearer ${localStorage.getItem("access-Token")}`
-                },
-                body: JSON.stringify({ title, content })
-            });
-    console.log(res);
-    
-            const data = await res.json();
-    
-            if (res.ok) {
-                console.log('Blog created:', data);
-                alert('Blog created successfully!');
-                setTitle('');
-                setContent('');
-                
-            } else {
-                console.error('Error:', data.error ||  data.message || 'Something went wrong');
-            }
-        } catch (error) {
-            console.error('Request failed:', error.message);
-        }
+        // Handle post creation logic here, now with content included
+        console.log('Post Created:', { title, category, content });
     };
 
     // Toolbar options with all available modules
@@ -70,7 +46,9 @@ const CreatePost = () => {
     return (
         <Layout>
             <div>
-                <form onSubmit={handleSubmit}>
+                {/* edit post */}
+
+                <h1 className='text-3xl font-semibold mb-3'>Edit Post</h1>                <form onSubmit={handleSubmit}>
                     <section className='flex items-center justify-between gap-8'>
                         {/* Title */}
                         <div className='w-[70%]'>
@@ -83,7 +61,7 @@ const CreatePost = () => {
                                 placeholder='Blog Title'
                             />
                         </div>
-                        {/* Category
+                        {/* Category */}
                         <div className='w-[30%]'>
                             <select
                                 value={category}
@@ -96,7 +74,7 @@ const CreatePost = () => {
                                 <option value="web3">Web 3.0</option>
                                 <option value="all">All</option>
                             </select>
-                        </div> */}
+                        </div>
                     </section>
 
                     {/* Text Editor for Blog Content */}
@@ -129,4 +107,4 @@ const CreatePost = () => {
     );
 };
 
-export default CreatePost;
+export default EditPost;

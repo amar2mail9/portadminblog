@@ -7,6 +7,7 @@ const PageNotFound = () => {
                 {/* 404 Image */}
                 <div className="mb-6">
                     <img
+                        loading='lazy'
                         src="https://s3-cdn.cmlabs.co/page/2023/01/24/a-guideline-on-how-to-fix-error-404-not-found-effectively-519451.png"
                         alt="404 error"
                         className="w-full h-full rounded-lg mx-auto mb-4"

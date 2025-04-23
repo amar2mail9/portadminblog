@@ -32,7 +32,7 @@ const Categories = () => {
           <AllCategory />
         </section>
       </div>
-
+      {/* create category */}
       <Modal
         open={open}
         onClose={handleClose}
