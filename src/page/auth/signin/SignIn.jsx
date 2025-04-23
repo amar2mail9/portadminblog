@@ -19,7 +19,7 @@ const SignIn = () => {
     setLoading(true);
 
     try {
-      const res = await fetch(`${API_URL}/users/auth`, {
+      const res = await fetch(`${API_URL}/auth`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
