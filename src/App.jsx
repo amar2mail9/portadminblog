@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 
 import Dashboard from "./page/Dashboard/Dashboard";
+import Cookies from "js-cookie";
 
 import AllPost from "./page/Posts/AllPost.jsx/AllPost";
 import CreatePost from "./page/Posts/CreatePost/CreatePost";
@@ -10,14 +11,16 @@ import PageNotFound from "./components/ErrorPage/PageNotFound";
 import EditPost from "./page/Posts/AllPost.jsx/EditPost";
 import SignIn from "./page/auth/signin/SignIn";
 import { ToastContainer } from "react-toastify";
+import Signup from "./page/auth/signup/Signup";
+import ForgotPassword from "./page/auth/ForgetPassword/ForgetPassword";
 
 const PublicRoutes = ({ children }) => {
-  const Token = localStorage.getItem("access-Token");
+  const Token = Cookies.get("accessToken");
   return Token ? <Navigate to="/" /> : children;
 };
 
 const PrivateRoutes = ({ children }) => {
-  const Token = localStorage.getItem("access-Token");
+  const Token = Cookies.get("accessToken");
   return Token ? children : <Navigate to="/login" />;
 };
 
@@ -33,6 +36,22 @@ const App = () => {
           element={
             <PublicRoutes>
               <SignIn />
+            </PublicRoutes>
+          }
+        />
+        <Route
+          path="/signup"
+          element={
+            <PublicRoutes>
+              <Signup />
+            </PublicRoutes>
+          }
+        />
+        <Route
+          path="/forgot-password"
+          element={
+            <PublicRoutes>
+              <ForgotPassword />
             </PublicRoutes>
           }
         />
