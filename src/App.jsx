@@ -1,4 +1,4 @@
-"import { BrowserRouter, Routes, Route, Navigate } from "
+import { BrowserRouter, Routes, Route, Navigate } from react-router-dom
 
 import Dashboard from "./page/Dashboard/Dashboard";
 import Cookies from "js-cookie";
