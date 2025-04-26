@@ -91,7 +91,14 @@ const App = () => {
             </PrivateRoutes>
           }
         />
-        <Route path="*" element={<PageNotFound />} />
+        <Route
+          path="*"
+          element={
+            <PrivateRoutes>
+              <PageNotFound />
+            </PrivateRoutes>
+          }
+        />
       </Routes>
       <ToastContainer />
     </BrowserRouter>

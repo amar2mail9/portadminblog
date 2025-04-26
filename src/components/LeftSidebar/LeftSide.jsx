@@ -1,5 +1,5 @@
 import React from "react";
-
+import Cookies from "js-cookie";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { menuList } from "../../constant";
 import { RiLogoutCircleLine } from "react-icons/ri";
@@ -10,7 +10,7 @@ const LeftSide = () => {
   const location = useLocation();
 
   const handleLogout = () => {
-    localStorage.removeItem("access-Token");
+    Cookies.remove("accessToken");
     navigate("/login");
   };
 
