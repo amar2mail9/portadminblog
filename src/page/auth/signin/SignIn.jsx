@@ -29,9 +29,9 @@ const SignIn = () => {
 
       if (res.ok) {
         toast.success(`Welcome, ${data.user.username}!`);
-        const expiryDate = new Date(new Date().getTime() + 10000);
+      
         Cookies.set("accessToken", data.user?.accessToken, {
-          expires: expiryDate, // 7 days
+          expires: 1, // 7 days
           secure: true, // only over HTTPS
           sameSite: "strict",
         }); 
