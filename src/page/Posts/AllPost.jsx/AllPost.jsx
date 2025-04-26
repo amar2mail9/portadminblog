@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Layout from "../../../components/Layout/Layout";
 import { blogData } from "../../../BlogData";
-import { FaEdit, FaEye, FaGlobe, FaLock, FaTrash } from "react-icons/fa";
+import { FaEdit, FaEye, FaTrash } from "react-icons/fa";
 import { Modal } from "@mui/material";
 import PreviewPost from "./PreviewPost";
 import { Link } from "react-router-dom";
