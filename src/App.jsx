@@ -12,6 +12,9 @@ import SignIn from "./page/auth/signin/SignIn";
 import { ToastContainer } from "react-toastify";
 import Signup from "./page/auth/signup/Signup";
 import ForgotPassword from "./page/auth/ForgetPassword/ForgetPassword";
+import Comments from "./page/Comments/Comments";
+import UserManagement from "./page/UserManagements/UserManagement";
+import Setting from "./page/Settining/Setting";
 
 const PublicRoutes = ({ children }) => {
   const Token = Cookies.get("accessToken");
@@ -96,6 +99,30 @@ const App = () => {
           element={
             <PrivateRoutes>
               <PageNotFound />
+            </PrivateRoutes>
+          }
+        />
+        <Route
+          path="/comments"
+          element={
+            <PrivateRoutes>
+              <Comments />
+            </PrivateRoutes>
+          }
+        />
+        <Route
+          path="/user-management"
+          element={
+            <PrivateRoutes>
+              <UserManagement />
+            </PrivateRoutes>
+          }
+        />
+        <Route
+          path="/settings"
+          element={
+            <PrivateRoutes>
+              <Setting />
             </PrivateRoutes>
           }
         />
