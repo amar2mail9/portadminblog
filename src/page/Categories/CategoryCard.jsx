@@ -11,7 +11,7 @@ const CategoryCard = ({
   //   handleDelete,
 }) => {
   return (
-    <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300 max-w-sm mx-auto">
+    <div className="bg-white md:hidden mb-2 dark:bg-gray-800 rounded-2xl shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300 max-w-sm mx-auto">
       <div className="h-48 w-full overflow-hidden">
         <img
           src={image}

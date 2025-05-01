@@ -15,6 +15,7 @@ const Signup = () => {
     username: "",
     phone: "",
     fullname: "",
+    role: "admin",
   });
 
   const handleOnChange = (e) => {
@@ -99,6 +100,7 @@ const Signup = () => {
     formData.password,
     formData.username,
     formData.phone,
+    formData.role,
   ]);
 
   return (
