@@ -1,15 +1,24 @@
-import { Box, Button, Typography } from "@mui/material";
+import {
+  Box,
+  Button,
+  FormControlLabel,
+  Switch,
+  Typography,
+} from "@mui/material";
 import React, { useState } from "react";
 import { FaUpload } from "react-icons/fa";
 import { toast } from "react-toastify";
 import Cookies from "js-cookie";
+import { useNavigate } from "react-router-dom";
 
 const CreateCategory = () => {
-  const [imageFile, setImageFile] = useState(null); // for FormData
-  const [imagePreview, setImagePreview] = useState(null); // for UI
+  const [imageFile, setImageFile] = useState(null);
+  const [imagePreview, setImagePreview] = useState(null);
   const [categoryName, setCategoryName] = useState("");
   const [description, setDescription] = useState("");
   const [isPublished, setIsPublished] = useState(false);
+
+  const [isloading, setIsloading] = useState(false);
 
   const handleImageUpload = (event) => {
     const file = event.target.files[0];
@@ -24,7 +33,9 @@ const CreateCategory = () => {
   };
 
   const createCategory = async () => {
+    setIsloading(true);
     if (!categoryName || !description || !imageFile) {
+      setIsloading(false);
       return toast.warn("All fields including image are required.");
     }
 
@@ -32,8 +43,7 @@ const CreateCategory = () => {
     formData.append("categoryName", categoryName);
     formData.append("description", description);
     formData.append("isPublished", isPublished);
-    formData.append("image", imageFile); // 👈 Send real image file
-
+    formData.append("image", imageFile);
     try {
       const res = await fetch(`${import.meta.env.VITE_API_URI}/category/new`, {
         method: "POST",
@@ -44,10 +54,18 @@ const CreateCategory = () => {
       });
 
       const result = await res.json();
-      if (!res.ok) throw new Error(result.message || "Request failed");
+      if (!res.ok)
+        throw new Error(result.message || result.error || "Request failed");
 
-      toast.success("Category created successfully!");
+      toast.success(result.message || "Category created successfully!");
+      setIsloading(false);
+      setCategoryName("");
+      setDescription("");
+      setImageFile(null);
+      setImagePreview(null);
+      
     } catch (error) {
+      setIsloading(false);
       toast.error(error.message || "Something went wrong");
     }
   };
@@ -105,13 +123,26 @@ const CreateCategory = () => {
           </div>
         )}
       </div>
+      <FormControlLabel
+        control={
+          <Switch
+            checked={isPublished}
+            onChange={(e) => setIsPublished(e.target.checked)}
+            color="secondary"
+          />
+        }
+        label="Publish this category"
+      />
 
       <div className="mt-4">
         <button
+          disabled={isloading}
           onClick={createCategory}
-          className="flex items-center gap-2 py-2 px-8 rounded-lg text-[1rem] bg-gradient-to-r from-pink-600 to-pink-800 text-white"
+          className={`flex items-center  gap-2 py-2 px-8 cur rounded-lg text-[1rem] bg-gradient-to-r from-pink-600 to-pink-800 text-white ${
+            isloading ? "cursor-not-allowed opacity-35" : "cursor-pointer"
+          }`}
         >
-          Save
+          {isloading ? "Waiting..." : "Save"}
         </button>
       </div>
     </Box>

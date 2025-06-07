@@ -1,14 +1,8 @@
-import {
-  Box,
-  Button,
-  TextareaAutosize,
-  TextField,
-  Typography,
-} from "@mui/material";
+import { Box, Button, Typography } from "@mui/material";
 import React, { useState } from "react";
 import { FaUpload } from "react-icons/fa";
 
-const EditCategory = () => {
+const EditCategory = ({ slug }) => {
   const [image, setImage] = useState(null); // For storing the uploaded image preview
 
   // Handle image preview
@@ -22,6 +16,8 @@ const EditCategory = () => {
       reader.readAsDataURL(file);
     }
   };
+
+  console.log(slug);
 
   return (
     <Box className="bg-gray-800 absolute border border-gray-600 rounded-2xl top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 p-4 shadow-xl md:w-[500px] w-11/12 ">

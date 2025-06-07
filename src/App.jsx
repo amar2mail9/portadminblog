@@ -84,7 +84,14 @@ const App = () => {
             </PrivateRoutes>
           }
         />
-        <Route path="/categories" element={<Categories />} />
+        <Route
+          path="/categories"
+          element={
+            <PrivateRoutes>
+              <Categories />
+            </PrivateRoutes>
+          }
+        />
         {/* edit post */}
         <Route
           path={"/edit-post/:slug"}

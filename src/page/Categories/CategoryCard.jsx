@@ -4,11 +4,12 @@ import { FaEye, FaEdit, FaTrash } from "react-icons/fa";
 const CategoryCard = ({
   image,
   categoryName,
-  status,
+  slug,
+  isPublished,
   description,
   handlePreviewOpen,
   handleEditOpen,
-  //   handleDelete,
+  handleDelete,
 }) => {
   return (
     <div className="bg-white md:hidden mb-2 dark:bg-gray-800 rounded-2xl shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300 max-w-sm mx-auto">
@@ -30,15 +31,19 @@ const CategoryCard = ({
         <div className="flex justify-between items-center mt-4">
           <span
             className={`text-xs font-medium px-2 py-1 rounded-full ${
-              status ? "bg-green-100 text-green-700" : "bg-red-100 text-red-700"
+              isPublished
+                ? "bg-green-100 text-green-700"
+                : "bg-red-100 text-red-700"
             }`}
           >
-            {status ? "Public" : "Private"}
+            {isPublished ? "Public" : "Private"}
           </span>
 
           <div className="flex items-center gap-3">
             <button
-              onClick={handlePreviewOpen}
+              onClick={() => {
+                handlePreviewOpen(slug);
+              }}
               className="text-blue-600 hover:text-blue-800 text-sm flex items-center gap-1"
               title="Preview"
             >
@@ -52,7 +57,7 @@ const CategoryCard = ({
               <FaEdit />
             </button>
             <button
-              //   onClick={handleDelete}
+              onClick={handleDelete}
               className="text-gray-700 dark:text-gray-300 hover:text-red-600 text-sm flex items-center gap-1"
               title="Delete"
             >
