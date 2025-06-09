@@ -1,68 +1,65 @@
 @import "tailwindcss";
 
-
-
 /* 
 /* Styling the scrollbar (for WebKit-based browsers like Chrome, Safari, Edge) */
 .scrollable-container::-webkit-scrollbar {
-    width: 2px;
-    /* Width of the scrollbar */
+  display: none;
+  /* Width of the scrollbar */
 }
 
 .scrollable-container::-webkit-scrollbar-track {
-    background: #090909;
-    /* Light gray background of the scrollbar track */
+  background: #090909;
+  /* Light gray background of the scrollbar track */
 }
 
 .scrollable-container::-webkit-scrollbar-thumb {
-    background: #888;
-    /* Color of the scrollbar thumb */
-    border-radius: 8px;
-    /* Optional rounded corners */
+  background: #888;
+  /* Color of the scrollbar thumb */
+  border-radius: 8px;
+  /* Optional rounded corners */
 }
 
 .scrollable-container::-webkit-scrollbar-thumb:hover {
-    background: #555;
-    /* Darker color when hovering over the scrollbar */
+  background: #555;
+  /* Darker color when hovering over the scrollbar */
 }
-
 
 /* Custom CSS */
 .quill-editor .ql-container {
-    border: none !important;
-    color: #f2f2f2 !important;
+  border: none !important;
+  color: #f2f2f2 !important;
 }
 
 /* Remove borders, padding, or margins in the header */
 .top-header {
-    border: none !important;
-    padding: 0 !important;
-    margin: 0 !important;
+  border: none !important;
+  padding: 0 !important;
+  margin: 0 !important;
 }
 
 /* Custom Quill Editor Styling */
 .ql-editor {
-    background-color: #103f51;
-    /* Dark background */
-    color: white;
-    /* White text */
-    border-radius: 10px;
-    /* Rounded corners */
-    padding: 16px;
+  background-color: #103f51;
+  /* Dark background */
+  color: white;
+  /* White text */
+  border-radius: 10px;
+  /* Rounded corners */
+  padding: 16px;
 }
 
 /* Custom Toolbar Styling */
 .ql-toolbar {
-    background-color: #e2cde3;
-    /* Darker background for toolbar */
-    border-bottom: 2px solid #444;
-    /* Light border between toolbar and editor */
+  background-color: #e2cde3;
+  /* Darker background for toolbar */
+  border-bottom: 2px solid #444;
+  /* Light border between toolbar and editor */
 }
 
 /* Add custom hover effect for toolbar buttons */
 .ql-toolbar button:hover {
-    background-color: #50284b;
-    /* Light grey background on hover */
-    color: #fff;
-    /* White text on hover */
+  background-color: #50284b;
+  /* Light grey background on hover */
+  color: #fff;
+  /* White text on hover */
 }

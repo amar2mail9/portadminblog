@@ -4,6 +4,7 @@ import { useState } from "react";
 import { toast } from "react-toastify";
 import Cookies from "js-cookie";
 import Spinner from "../Spinner";
+import { useNavigate } from "react-router-dom";
 
 export const CreateCategory = () => {
   const [categoryName, setCategoryName] = useState("");
@@ -11,6 +12,7 @@ export const CreateCategory = () => {
   const [image, setImage] = useState(null);
   const [isPublished, setIsPublished] = useState(true);
   const [isloading, setIsloading] = useState(false);
+  const navigate = useNavigate();
 
   //handel image upload
   const handleImageUpload = (event) => {
@@ -56,6 +58,7 @@ export const CreateCategory = () => {
         setImage(null);
         setIsPublished(false);
         setIsloading(false);
+        navigate("/categories");
       }
       if (!res.ok) {
         toast.error(`${data.message || data.error || "Failded"}`);
@@ -66,7 +69,6 @@ export const CreateCategory = () => {
     }
   };
 
-  
   if (isloading) {
     return (
       <Layout>
@@ -140,12 +142,20 @@ export const CreateCategory = () => {
         {/* Is Published */}
         <div className="mb-6 flex items-center">
           <input
+            onChange={() => {
+              setIsPublished((prev) => {
+                const updated = !prev;
+                console.log(updated);
+                return updated;
+              });
+            }}
+            checked={isPublished}
             type="checkbox"
             id="published"
             className="w-4 h-4 text-pink-600 bg-gray-700 border-gray-600 rounded focus:ring-Pink-500"
           />
           <label htmlFor="published" className="ml-2 text-sm">
-            Publish this category
+            {isPublished ? "Public" : "Private"}
           </label>
         </div>
 

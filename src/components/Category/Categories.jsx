@@ -9,8 +9,9 @@ import Cookies from "js-cookie";
 
 const CategoryGrid = () => {
   const [categories, setCategories] = useState([]);
-  console.log(categories);
+  const [isloading, setIsloading] = useState(false);
 
+  // fecth category
   const fetchData = async () => {
     const res = await fetch(`${import.meta.env.VITE_API_URI}/categories/all`, {
       method: "GET",
@@ -19,12 +20,46 @@ const CategoryGrid = () => {
       },
     });
     const data = await res.json();
-    setCategories(data.categories);
+    console.log(data);
+
+    setCategories(data?.categories);
+  };
+  console.log(categories);
+
+  // Delete Category
+
+  const deleteCategory = async (_id) => {
+    try {
+      const res = await fetch(
+        `${import.meta.env.VITE_API_URI}/category/${_id}`,
+        {
+          method: "DELETE",
+          headers: {
+            Authorization: `Bearer ${Cookies.get("accessToken")}`,
+          },
+        }
+      );
+
+      if (res.ok) {
+        // Update local state to remove the deleted category
+        setCategories((prev) => prev.filter((cat) => cat._id !== _id));
+      }
+    } catch (error) {}
   };
 
+  // use
   useEffect(() => {
     fetchData();
   }, []);
+
+  if (categories?.length === 0) {
+    return (
+      <Layout>
+        <Spinner message="Loading categories..." />
+      </Layout>
+    );
+  }
+  // return
   return (
     <Layout>
       {/* Category Add section */}
@@ -38,17 +73,23 @@ const CategoryGrid = () => {
           </button>
         </Link>
       </div>
-
-      {categories.length === 0 || null ? (
-        <Spinner />
+      {categories?.length === 0 ? (
+        <div>
+          <Spinner message="Loadning...." />
+        </div>
       ) : (
-        <div className="p-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-          {categories.map((category, index) => (
-            <CategoryCard key={index} {...category} />
-          ))}
+        <div className="mt-5">
+          {categories?.map((category, index) => {
+            return (
+              <CategoryCard
+                key={index}
+                {...category}
+                deleteCategory={deleteCategory}
+              />
+            );
+          })}
         </div>
       )}
-      {/* Categor Data  */}
     </Layout>
   );
 };
