@@ -6,6 +6,7 @@ import { Modal } from "@mui/material";
 import PreviewPost from "./PreviewPost";
 import { Link } from "react-router-dom";
 import BlogCard from "./Card";
+import Spinner from "../../../components/Spinner";
 
 const AllPost = () => {
   const [previewPost, setPreviewPost] = useState(false);
@@ -16,6 +17,11 @@ const AllPost = () => {
   const handleClosedPostPreview = () => {
     setPreviewPost(false);
   };
+
+  if (blogData)
+    <Layout>
+      <Spinner />
+    </Layout>;
   return (
     <Layout>
       <>
@@ -131,21 +137,23 @@ const AllPost = () => {
         <main className="md:hidden block">
           {/* Header with labels */}
           <div className="grid grid-cols-1 gap-4 mb-4">
-            {blogData.map((blog, idx) => {
-              return (
-                <BlogCard
-                  title={blog.title}
-                  description={blog.expertContent}
-                  image={blog.featuredImage}
-                  category={blog.category}
-                  date={blog.publishedAt}
-                  isPublished={blog.isPublished}
-                  onView={() => console.log("View")}
-                  onEdit={() => console.log("Edit")}
-                  onDelete={() => console.log("Delete")}
-                />
-              );
-            })}
+            {
+              !blogData.map((blog, idx) => {
+                return (
+                  <BlogCard
+                    title={blog.title}
+                    description={blog.expertContent}
+                    image={blog.featuredImage}
+                    category={blog.category}
+                    date={blog.publishedAt}
+                    isPublished={blog.isPublished}
+                    onView={() => console.log("View")}
+                    onEdit={() => console.log("Edit")}
+                    onDelete={() => console.log("Delete")}
+                  />
+                );
+              })
+            }
           </div>
         </main>
       </>

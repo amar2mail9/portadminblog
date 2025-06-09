@@ -5,7 +5,7 @@ import Cookies from "js-cookie";
 
 import AllPost from "./page/Posts/AllPost.jsx/AllPost";
 import CreatePost from "./page/Posts/CreatePost/CreatePost";
-import Categories from "./page/Categories/Categories";
+
 import PageNotFound from "./components/ErrorPage/PageNotFound";
 import EditPost from "./page/Posts/AllPost.jsx/EditPost";
 import SignIn from "./page/auth/signin/SignIn";
@@ -15,6 +15,8 @@ import ForgotPassword from "./page/auth/ForgetPassword/ForgetPassword";
 import Comments from "./page/Comments/Comments";
 import UserManagement from "./page/UserManagements/UserManagement";
 import Setting from "./page/Settining/Setting";
+import CreateCategory from "./components/Category/CreateCategory.jsx";
+import CategoryGrid from "./components/Category/Categories.jsx";
 
 const PublicRoutes = ({ children }) => {
   const Token = Cookies.get("accessToken");
@@ -85,10 +87,18 @@ const App = () => {
           }
         />
         <Route
+          path={"/category/new"}
+          element={
+            <PrivateRoutes>
+              <CreateCategory />
+            </PrivateRoutes>
+          }
+        />
+        <Route
           path="/categories"
           element={
             <PrivateRoutes>
-              <Categories />
+              <CategoryGrid />
             </PrivateRoutes>
           }
         />
