@@ -5,6 +5,7 @@ import { toast } from "react-toastify";
 import Cookies from "js-cookie";
 import PostCard from "./PostCard";
 import { Button } from "@mui/material";
+import Spinner from "../../../components/Spinner.jsx";
 const Posts = () => {
   const location = useLocation();
   const [blogs, setBlogs] = useState([]);
@@ -27,6 +28,7 @@ const Posts = () => {
       toast.error(`${error.error || "Something Went Wrong"}`);
     }
   };
+
   useEffect(() => {
     fetchPost();
   }, [location.pathname === "/blog-post"]);
@@ -39,12 +41,16 @@ const Posts = () => {
           </Button>
         </Link>
       </section>
-      <section className="grid lg:grid-cols-4 gap-4 md:grid-cols-3 sm:grid-cols-2 grid-cols-1 ">
-        {blogs.map((blog, idx) => {
-          console.log(blog);
-          return <PostCard key={idx} {...blog} />;
-        })}
-      </section>
+      {blogs.length === 0 ? (
+        <Spinner message="Loading Blogs..." />
+      ) : (
+        <section className="grid lg:grid-cols-4 gap-4 md:grid-cols-3 sm:grid-cols-2 grid-cols-1 ">
+          {blogs.map((blog, idx) => {
+            console.log(blog);
+            return <PostCard key={idx} {...blog} />;
+          })}
+        </section>
+      )}
     </Layout>
   );
 };

@@ -130,11 +130,19 @@ const CreatePost = () => {
                 >
                   Select Category
                 </option>
-                {categoryList.map((cate, idx) => (
-                  <option key={idx} value={cate?.slug} className="text-white ">
-                    {cate?.categoryName}
-                  </option>
-                ))}
+                {categoryList.length === 0 ? (
+                  <option>No </option>
+                ) : (
+                  categoryList.map((cate, idx) => (
+                    <option
+                      key={idx}
+                      value={cate?.slug}
+                      className="text-white "
+                    >
+                      {cate?.categoryName}
+                    </option>
+                  ))
+                )}
               </select>
             </div>
           </section>
