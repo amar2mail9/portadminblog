@@ -46,7 +46,6 @@ const Posts = () => {
       ) : (
         <section className="grid lg:grid-cols-4 gap-4 md:grid-cols-3 sm:grid-cols-2 grid-cols-1 ">
           {blogs.map((blog, idx) => {
-            console.log(blog);
             return <PostCard key={idx} {...blog} />;
           })}
         </section>

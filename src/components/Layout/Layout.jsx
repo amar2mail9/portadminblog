@@ -1,11 +1,13 @@
 import React, { useState } from "react";
 import LeftSide from "../LeftSidebar/LeftSide";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { TiThMenu } from "react-icons/ti";
-import { Box, Modal } from "@mui/material";
+import { Box, Button, Modal } from "@mui/material";
 import { menuList } from "../../constant";
+import Cookies from "js-cookie";
 
 const Layout = ({ children }) => {
+  const navigate = useNavigate();
   const location = useLocation();
   const [open, setOpen] = useState(false);
 
@@ -76,6 +78,15 @@ const Layout = ({ children }) => {
                   </Link>
                 );
               })}
+              <Button
+                onClick={() => {
+                  Cookies.remove("accessToken");
+                  navigate("/login");
+                }}
+                className="!text-white !w-full  !capitalize !transition-all !duration-200 !bg-rose-600 hover:!bg-rose-700"
+              >
+                SignOut
+              </Button>
             </div>
           </Box>
         </Modal>
