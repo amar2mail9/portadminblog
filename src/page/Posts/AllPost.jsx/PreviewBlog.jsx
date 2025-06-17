@@ -25,12 +25,12 @@ const PreviewBlog = ({ slug }) => {
   }, [slug]);
   return (
     <div>
-      <Box className="absolute top-1/2 left-1/2 transform -translate-x-1/2 md:h-[95vh] h-[75vh] -translate-y-1/2 min-w-sm max-w-full  bg-gray-900 border-1 border-gray-600 rounded-lg shadow-2xl">
+      <Box className="absolute top-1/2 left-1/2 transform -translate-x-1/2  -translate-y-1/2 min-w-sm max-w-full  bg-gray-900 border-1 border-gray-600 rounded-lg shadow-2xl">
         {blog === null ? (
           <Spinner />
         ) : (
-          <Box>
-            <Box className="h-[35%] rounded-2xl">
+          <Box className="md:h-[95vh] h-[75vh] w-full">
+            <Box className="h-[35%] rounded-2xl w-full">
               <CardMedia
                 component="img"
                 className="h-full object-center object-cover rounded-t-lg"
