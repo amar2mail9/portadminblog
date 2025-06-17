@@ -3,7 +3,6 @@ import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import Dashboard from "./page/Dashboard/Dashboard";
 import Cookies from "js-cookie";
 
-import AllPost from "./page/Posts/AllPost.jsx/AllPost";
 import CreatePost from "./page/Posts/CreatePost/CreatePost";
 
 import PageNotFound from "./components/ErrorPage/PageNotFound";
@@ -17,6 +16,7 @@ import UserManagement from "./page/UserManagements/UserManagement";
 import Setting from "./page/Settining/Setting";
 import CreateCategory from "./components/Category/CreateCategory.jsx";
 import CategoryGrid from "./components/Category/Categories.jsx";
+import Posts from "./page/Posts/AllPost.jsx/Posts.jsx";
 
 const PublicRoutes = ({ children }) => {
   const Token = Cookies.get("accessToken");
@@ -74,7 +74,7 @@ const App = () => {
           path="/blog-post"
           element={
             <PrivateRoutes>
-              <AllPost />
+              <Posts />
             </PrivateRoutes>
           }
         />

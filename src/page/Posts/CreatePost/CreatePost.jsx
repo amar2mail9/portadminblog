@@ -1,12 +1,18 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Layout from "../../../components/Layout/Layout";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css"; // Import default styling
 import "react-quill/dist/quill.bubble.css"; // Import bubble theme CSS
-
+import { toast } from "react-toastify";
+import { useLocation, useNavigate } from "react-router-dom";
+import Cookies from "js-cookie";
 const CreatePost = () => {
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
+  const [categoryList, setCategoryList] = useState([]);
+  const [selectedCategory, setSelectedCategory] = useState("");
+  const [expert, setExpert] = useState("");
+  const location = useLocation();
 
   const handleTitleChange = (e) => {
     setTitle(e.target.value);
@@ -18,18 +24,22 @@ const CreatePost = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(localStorage.getItem("access-Token"));
+
     try {
       const res = await fetch(`${import.meta.env.VITE_API_URI}/blog/new`, {
         method: "POST",
 
         headers: {
           "Content-Type": "application/json",
-          Authorization: `Bearer ${localStorage.getItem("access-Token")}`,
+          Authorization: `Bearer ${Cookies.get("accessToken")}`,
         },
-        body: JSON.stringify({ title, content }),
+        body: JSON.stringify({
+          title,
+          content,
+          expert,
+          category: selectedCategory,
+        }),
       });
-      console.log(res);
 
       const data = await res.json();
 
@@ -65,6 +75,31 @@ const CreatePost = () => {
     ],
   };
 
+  // fetch category list
+  const fetchCategory = async () => {
+    try {
+      const res = await fetch(
+        `${import.meta.env.VITE_API_URI}/categories/all`,
+        {
+          method: "GET",
+          headers: {
+            Authorization: `Bearer ${Cookies.get("accessToken")}`,
+          },
+        }
+      );
+      const data = await res.json();
+      setCategoryList(data.categories);
+    } catch (error) {
+      toast.error(error?.message || "Something is went wrong");
+    }
+  };
+
+  useEffect(() => {
+    if (location.pathname === "/create-post") {
+      fetchCategory();
+    }
+  }, [location.pathname]);
+
   return (
     <Layout>
       <div>
@@ -82,13 +117,24 @@ const CreatePost = () => {
               />
             </div>
             {/* Category */}
-            <div className="md:w-[30%] w-full">
-              <select className="bg-gray-800 w-full py-2 px-4 rounded-lg border border-gray-700">
-                <option value="">Select Category</option>
-                <option value="blockchain">Blockchain</option>
-                <option value="ai">Artificial Intelligence</option>
-                <option value="web3">Web 3.0</option>
-                <option value="all">All</option>
+            <div className="w-full md:w-1/3">
+              <select
+                id="categorySelect"
+                value={selectedCategory}
+                onChange={(e) => setSelectedCategory(e.target.value)}
+                className="w-full bg-gray-900 border border-gray-700 appearance-none text-white text-sm rounded-lg focus:ring-pink-500 focus:border-pink-500 px-4 py-2"
+              >
+                <option
+                  value="Uncategozized"
+                  className="text-gray-400 hover:bg-blue-500"
+                >
+                  Select Category
+                </option>
+                {categoryList.map((cate, idx) => (
+                  <option key={idx} value={cate?.slug} className="text-white ">
+                    {cate?.categoryName}
+                  </option>
+                ))}
               </select>
             </div>
           </section>
@@ -98,9 +144,9 @@ const CreatePost = () => {
             <ReactQuill
               value={content}
               onChange={handleContentChange}
-              theme="snow" // 'snow' theme with custom styling
+              theme="snow"
               modules={modules}
-              className="bg-gray-800 h-80 mb-8  top-header !outline-0 border-none !text-white quill-editor"
+              className="h-80 mb-8 !outline-none text-white quill-editor"
             />
           </section>
 
@@ -109,6 +155,10 @@ const CreatePost = () => {
               name=""
               rows={2}
               id=""
+              value={expert}
+              onChange={(e) => {
+                setExpert(e.target.value);
+              }}
               className="border border-gray-800 w-full p-2 rounded-lg outline outline-green-800"
               placeholder="expert"
             ></textarea>

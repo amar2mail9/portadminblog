@@ -22,12 +22,16 @@ const CategoryCard = ({
   return (
     <>
       {" "}
-      <div className="bg-gray-800 shadow-md rounded-lg overflow-hidden cursor-pointer hover:shadow-xl transition-shadow duration-300">
+      <div className="bg-gray-800 md:max-w-xs max-w-md shadow-md rounded-lg overflow-hidden cursor-pointer hover:shadow-xl transition-shadow duration-300">
         <img
+          onClick={() => {
+            handleOpen();
+          }}
           src={featuredImage}
           alt={categoryName}
-          className="w-full h-40 object-cover"
+          className="w-full h-40  object-center  object-cover sm:h-48 md:h-56"
         />
+
         <div className="p-4">
           <h3 className="text-lg font-semibold mb-2">{categoryName}</h3>
           <p className="text-gray-300 text-sm line-clamp-2">{description}</p>

@@ -3,8 +3,6 @@ import React, { useEffect, useState } from "react";
 import Spinner from "../Spinner";
 
 const PreViewData = ({ slug }) => {
-  console.log(slug);
-
   const [category, setCategory] = useState(null);
   const fetchCategoryData = async () => {
     try {

@@ -24,42 +24,22 @@
   /* Darker color when hovering over the scrollbar */
 }
 
-/* Custom CSS */
-.quill-editor .ql-container {
-  border: none !important;
-  color: #f2f2f2 !important;
-}
-
-/* Remove borders, padding, or margins in the header */
-.top-header {
-  border: none !important;
-  padding: 0 !important;
-  margin: 0 !important;
-}
-
-/* Custom Quill Editor Styling */
-.ql-editor {
-  background-color: #103f51;
-  /* Dark background */
+/* Add in your global CSS or Tailwind layer if using custom styles */
+.quill-editor .ql-toolbar {
+  background-color: #1f2937; /* Tailwind: bg-gray-800 */
+  border: none;
+  border-radius: 0.5rem;
   color: white;
-  /* White text */
-  border-radius: 10px;
-  /* Rounded corners */
-  padding: 16px;
 }
 
-/* Custom Toolbar Styling */
-.ql-toolbar {
-  background-color: #e2cde3;
-  /* Darker background for toolbar */
-  border-bottom: 2px solid #444;
-  /* Light border between toolbar and editor */
+.quill-editor .ql-container {
+  background-color: #111827; /* Tailwind: bg-gray-900 */
+  color: white;
+  border: none;
+  border-radius: 0.5rem;
 }
 
-/* Add custom hover effect for toolbar buttons */
-.ql-toolbar button:hover {
-  background-color: #50284b;
-  /* Light grey background on hover */
-  color: #fff;
-  /* White text on hover */
+.quill-editor .ql-editor {
+  min-height: 18rem;
+  color: white;
 }
