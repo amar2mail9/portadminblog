@@ -1,65 +1,95 @@
 import React, { useEffect, useState } from "react";
 import Layout from "../../../components/Layout/Layout";
 import ReactQuill from "react-quill";
-import "react-quill/dist/quill.snow.css"; // Import default styling
-import "react-quill/dist/quill.bubble.css"; // Import bubble theme CSS
+import "react-quill/dist/quill.snow.css";
+import "react-quill/dist/quill.bubble.css";
 import { toast } from "react-toastify";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import Cookies from "js-cookie";
+import Spinner from "../../../components/Spinner.jsx";
+
 const CreatePost = () => {
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
   const [categoryList, setCategoryList] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState("");
   const [expert, setExpert] = useState("");
+  const [thumbnail, setThumbnail] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
   const location = useLocation();
 
-  const handleTitleChange = (e) => {
-    setTitle(e.target.value);
-  };
+  const handleTitleChange = (e) => setTitle(e.target.value);
+  const handleContentChange = (value) => setContent(value);
 
-  const handleContentChange = (value) => {
-    setContent(value);
+  const handleFile = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      setThumbnail(file);
+    }
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setIsLoading(true);
 
     try {
+      const formData = new FormData();
+      formData.append("title", title);
+      formData.append("content", content);
+      formData.append("expert", expert);
+      formData.append("category", selectedCategory);
+      if (thumbnail) formData.append("thumbnail", thumbnail);
+
       const res = await fetch(`${import.meta.env.VITE_API_URI}/blog/new`, {
         method: "POST",
-
         headers: {
-          "Content-Type": "application/json",
           Authorization: `Bearer ${Cookies.get("accessToken")}`,
         },
-        body: JSON.stringify({
-          title,
-          content,
-          expert,
-          category: selectedCategory,
-        }),
+        body: formData,
       });
 
       const data = await res.json();
 
       if (res.ok) {
-        console.log("Blog created:", data);
-        alert("Blog created successfully!");
         setTitle("");
         setContent("");
+        setExpert("");
+        setSelectedCategory("");
+        setThumbnail(null);
+        toast.success("Post created successfully!");
       } else {
-        console.error(
-          "Error:",
-          data.error || data.message || "Something went wrong"
-        );
+        toast.error(data.message || "Something went wrong");
       }
     } catch (error) {
-      console.error("Request failed:", error.message);
+      toast.error(error?.message || "Request failed");
+    } finally {
+      setIsLoading(false);
     }
   };
 
-  // Toolbar options with all available modules
+  const fetchCategory = async () => {
+    try {
+      const res = await fetch(
+        `${import.meta.env.VITE_API_URI}/categories/all`,
+        {
+          headers: {
+            Authorization: `Bearer ${Cookies.get("accessToken")}`,
+          },
+        }
+      );
+      const data = await res.json();
+      setCategoryList(data.categories || []);
+    } catch (error) {
+      toast.error(error?.message || "Failed to load categories");
+    }
+  };
+
+  useEffect(() => {
+    if (location.pathname === "/create-post") {
+      fetchCategory();
+    }
+  }, [location.pathname]);
+
   const modules = {
     toolbar: [
       [{ header: "1" }, { header: "2" }, { font: [] }],
@@ -71,52 +101,34 @@ const CreatePost = () => {
       ["link", "image", "video"],
       [{ indent: "-1" }, { indent: "+1" }],
       [{ direction: "rtl" }],
-      ["clean"], // To clear the editor
+      ["clean"],
     ],
   };
 
-  // fetch category list
-  const fetchCategory = async () => {
-    try {
-      const res = await fetch(
-        `${import.meta.env.VITE_API_URI}/categories/all`,
-        {
-          method: "GET",
-          headers: {
-            Authorization: `Bearer ${Cookies.get("accessToken")}`,
-          },
-        }
-      );
-      const data = await res.json();
-      setCategoryList(data.categories);
-    } catch (error) {
-      toast.error(error?.message || "Something is went wrong");
-    }
-  };
-
-  useEffect(() => {
-    if (location.pathname === "/create-post") {
-      fetchCategory();
-    }
-  }, [location.pathname]);
+  if (isLoading) {
+    return (
+      <Layout>
+        <Spinner />
+      </Layout>
+    );
+  }
 
   return (
     <Layout>
       <div>
         <form onSubmit={handleSubmit}>
           <section className="flex md:flex-row flex-col items-center justify-between md:gap-8 gap-3">
-            {/* Title */}
             <div className="md:w-[70%] w-full">
               <input
                 type="text"
                 value={title}
                 onChange={handleTitleChange}
-                autoFocus={true}
+                autoFocus
                 className="text-gray-100 w-full bg-gray-800 py-2 px-3 rounded-lg border border-gray-600 shadow outline-0"
                 placeholder="Blog Title"
               />
             </div>
-            {/* Category */}
+
             <div className="w-full md:w-1/3">
               <select
                 id="categorySelect"
@@ -124,21 +136,14 @@ const CreatePost = () => {
                 onChange={(e) => setSelectedCategory(e.target.value)}
                 className="w-full bg-gray-900 border border-gray-700 appearance-none text-white text-sm rounded-lg focus:ring-pink-500 focus:border-pink-500 px-4 py-2"
               >
-                <option
-                  value="Uncategozized"
-                  className="text-gray-400 hover:bg-blue-500"
-                >
+                <option value="Uncategozized" className="text-gray-400">
                   Select Category
                 </option>
                 {categoryList.length === 0 ? (
-                  <option>No </option>
+                  <option>No categories</option>
                 ) : (
                   categoryList.map((cate, idx) => (
-                    <option
-                      key={idx}
-                      value={cate?.slug}
-                      className="text-white "
-                    >
+                    <option key={idx} value={cate?.slug} className="text-white">
                       {cate?.categoryName}
                     </option>
                   ))
@@ -147,8 +152,7 @@ const CreatePost = () => {
             </div>
           </section>
 
-          {/* Text Editor for Blog Content */}
-          <section className="mt-4 w-full h-96  ">
+          <section className="mt-4 w-full h-96">
             <ReactQuill
               value={content}
               onChange={handleContentChange}
@@ -158,35 +162,45 @@ const CreatePost = () => {
             />
           </section>
 
+          {/* Image Upload */}
+          <section className="mt-4">
+            {thumbnail && (
+              <img
+                src={URL.createObjectURL(thumbnail)}
+                alt="Preview"
+                className="w-40 h-28 object-cover rounded border border-gray-600 mb-2"
+              />
+            )}
+            <input
+              type="file"
+              accept="image/*"
+              onChange={handleFile}
+              className="bg-gray-600 rounded-lg p-2 w-full"
+            />
+          </section>
+
+          {/* Expert, Metadata, Tags */}
           <section className="flex md:flex-row md:mt-4 mt-16 flex-col items-center justify-between gap-8">
             <textarea
-              name=""
               rows={2}
-              id=""
               value={expert}
-              onChange={(e) => {
-                setExpert(e.target.value);
-              }}
+              onChange={(e) => setExpert(e.target.value)}
               className="border border-gray-800 w-full p-2 rounded-lg outline outline-green-800"
-              placeholder="expert"
+              placeholder="Expert (short summary)"
             ></textarea>
             <textarea
-              name=""
               rows={2}
-              id=""
               className="border border-gray-800 w-full p-2 rounded-lg outline outline-green-800"
-              placeholder="meta data"
+              placeholder="Meta data (optional)"
             ></textarea>
             <textarea
-              name=""
               rows={2}
-              id=""
               className="border border-gray-800 w-full p-2 rounded-lg outline outline-green-800"
-              placeholder="Tags"
+              placeholder="Tags (optional)"
             ></textarea>
           </section>
-          <br />
 
+          <br />
           <button
             type="submit"
             className="py-2 px-6 bg-blue-500 text-white rounded-lg"
