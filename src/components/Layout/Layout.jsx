@@ -5,6 +5,7 @@ import { TiThMenu } from "react-icons/ti";
 import { Box, Button, Modal } from "@mui/material";
 import { menuList } from "../../constant";
 import Cookies from "js-cookie";
+import { FaSignOutAlt } from "react-icons/fa";
 
 const Layout = ({ children }) => {
   const navigate = useNavigate();
@@ -46,9 +47,9 @@ const Layout = ({ children }) => {
             {/* Mobile Sidebar Toggle */}
             <button
               onClick={handleOpen}
-              className="w-9 h-9 rounded-md bg-gray-700 flex items-center justify-center md:hidden"
+              className="!w-9 !h-9 p-2 !rounded-md !text-shadow-gray-800 !bg-gray-100 !flex items-center !justify-center md:hidden"
             >
-              <TiThMenu className="text-white text-2xl" />
+              <TiThMenu className="!text-shadow-gray-800  text-2xl w-full h-full" />
             </button>
           </div>
 
@@ -83,9 +84,9 @@ const Layout = ({ children }) => {
                   Cookies.remove("accessToken");
                   navigate("/login");
                 }}
-                className="!text-white !w-full  !capitalize !transition-all !duration-200 !bg-rose-600 hover:!bg-rose-700"
+                className="!text-white !w-full  !flex !items-center !text-center !justify-center !gap-2 !capitalize !transition-all !duration-200 !bg-rose-600 hover:!bg-rose-700"
               >
-                SignOut
+                <FaSignOutAlt /> SignOut
               </Button>
             </div>
           </Box>
