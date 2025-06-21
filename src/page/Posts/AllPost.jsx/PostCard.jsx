@@ -22,7 +22,7 @@ export default function PostCard({
   // return data
   return (
     <>
-      <div className="w-full max-w-sm mx-auto h-[340px] rounded-lg shadow-xl border border-gray-700 bg-gray-800 flex flex-col overflow-hidden">
+      <div className="w-full max-w-sm mx-auto h-[340px] rounded-lg shadow-xl border border-gray-200 bg-gray-100 flex flex-col overflow-hidden">
         {/* Image */}
         <div className="relative h-40">
           <img
@@ -45,10 +45,10 @@ export default function PostCard({
         {/* Content */}
         <div className="p-4 flex-1 flex flex-col justify-between">
           <div>
-            <h5 className="text-md font-semibold text-white line-clamp-2 mb-1">
+            <h5 className="text-md font-semibold text-gray-700 line-clamp-2 mb-1">
               {title ?? "Untitled"}
             </h5>
-            <p className="text-sm text-gray-400 line-clamp-3">
+            <p className="text-sm text-gray-600 line-clamp-3">
               {expert ?? "No description"}
             </p>
           </div>

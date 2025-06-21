@@ -7,6 +7,7 @@ import { toast } from "react-toastify";
 import { useLocation } from "react-router-dom";
 import Cookies from "js-cookie";
 import Spinner from "../../../components/Spinner.jsx";
+import { Editor } from "@tinymce/tinymce-react";
 
 const CreatePost = () => {
   const [title, setTitle] = useState("");
@@ -23,9 +24,7 @@ const CreatePost = () => {
 
   const handleFile = (e) => {
     const file = e.target.files[0];
-    if (file) {
-      setThumbnail(file);
-    }
+    if (file) setThumbnail(file);
   };
 
   const handleSubmit = async (e) => {
@@ -115,95 +114,146 @@ const CreatePost = () => {
 
   return (
     <Layout>
-      <div>
+      <div className="bg-white p-6 rounded-xl shadow-md max-w-5xl mx-auto">
         <form onSubmit={handleSubmit}>
-          <section className="flex md:flex-row flex-col items-center justify-between md:gap-8 gap-3">
-            <div className="md:w-[70%] w-full">
-              <input
-                type="text"
-                value={title}
-                onChange={handleTitleChange}
-                autoFocus
-                className="text-gray-100 w-full bg-gray-800 py-2 px-3 rounded-lg border border-gray-600 shadow outline-0"
-                placeholder="Blog Title"
-              />
-            </div>
+          {/* Title and Category */}
+          <section className="flex md:flex-row flex-col items-center justify-between md:gap-6 gap-4 mb-6">
+            <input
+              type="text"
+              value={title}
+              onChange={handleTitleChange}
+              autoFocus
+              className="w-full md:w-3/4 outline-0 text-gray-900 bg-gray-100 py-2 px-4 rounded-lg border border-gray-300 focus:ring-1 focus:ring-purple-200"
+              placeholder="Blog Title"
+            />
 
-            <div className="w-full md:w-1/3">
-              <select
-                id="categorySelect"
-                value={selectedCategory}
-                onChange={(e) => setSelectedCategory(e.target.value)}
-                className="w-full bg-gray-900 border border-gray-700 appearance-none text-white text-sm rounded-lg focus:ring-pink-500 focus:border-pink-500 px-4 py-2"
-              >
-                <option value="Uncategozized" className="text-gray-400">
-                  Select Category
-                </option>
-                {categoryList.length === 0 ? (
-                  <option>No categories</option>
-                ) : (
-                  categoryList.map((cate, idx) => (
-                    <option key={idx} value={cate?.slug} className="text-white">
-                      {cate?.categoryName}
-                    </option>
-                  ))
-                )}
-              </select>
-            </div>
+            <select
+              id="categorySelect"
+              value={selectedCategory}
+              onChange={(e) => setSelectedCategory(e.target.value)}
+              className="w-full md:w-1/4 bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-indigo-500 focus:border-indigo-500 px-4 py-2"
+            >
+              <option value="Uncategorized" className="text-gray-700">
+                Select Category
+              </option>
+              {categoryList.length === 0 ? (
+                <option>No categories</option>
+              ) : (
+                categoryList.map((cate, idx) => (
+                  <option key={idx} value={cate?.slug}>
+                    {cate?.categoryName}
+                  </option>
+                ))
+              )}
+            </select>
           </section>
 
-          <section className="mt-4 w-full h-96">
-            <ReactQuill
+          {/* Quill Editor */}
+          <section className="mb-6">
+            <Editor
+              apiKey="your-api-key"
+              value={content}
+              onEditorChange={(newContent) => setContent(newContent)}
+              init={{
+                height: 500,
+                menubar: true,
+                plugins: [
+                  "advlist",
+                  "autolink",
+                  "lists",
+                  "link",
+                  "image",
+                  "charmap",
+                  "preview",
+                  "anchor",
+                  "searchreplace",
+                  "visualblocks",
+                  "code",
+                  "fullscreen",
+                  "insertdatetime",
+                  "media",
+                  "table",
+                  "help",
+                  "wordcount",
+                  "codesample",
+                  "exportword",
+                  "importword",
+                  "markdown",
+                  "a11ychecker",
+                  "emoticons",
+                  "pageembed",
+                  "footnotes",
+                  "spellchecker",
+                  "ai",
+                  "mentions",
+                ],
+                toolbar:
+                  "undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | forecolor backcolor | align lineheight | \
+      bullist numlist checklist outdent indent | link image media table | emoticons charmap codesample | \
+      removeformat | help | exportword importword markdown fullscreen code",
+                tinycomments_mode: "embedded",
+                tinycomments_author: "Author",
+                mergetags_list: [
+                  { value: "First.Name", title: "First Name" },
+                  { value: "Email", title: "Email" },
+                ],
+                ai_request: (request, respondWith) =>
+                  respondWith.string(() =>
+                    Promise.reject("AI assistant integration needed")
+                  ),
+              }}
+            />
+
+            {/* <ReactQuill
               value={content}
               onChange={handleContentChange}
               theme="snow"
               modules={modules}
-              className="h-80 mb-8 !outline-none text-white quill-editor"
-            />
+              className="quill-editor notailwind"
+            /> */}
           </section>
 
-          {/* Image Upload */}
-          <section className="mt-4">
+          {/* Thumbnail Upload */}
+          <section className="mb-6">
             {thumbnail && (
               <img
                 src={URL.createObjectURL(thumbnail)}
                 alt="Preview"
-                className="w-40 h-28 object-cover rounded border border-gray-600 mb-2"
+                className="w-40 h-28 object-cover rounded border border-gray-300 mb-2"
               />
             )}
             <input
               type="file"
               accept="image/*"
               onChange={handleFile}
-              className="bg-gray-600 rounded-lg p-2 w-full"
+              className="file:bg-indigo-600 file:text-white file:rounded file:px-4 file:py-2 file:border-none bg-white border border-gray-300 rounded w-full text-gray-800"
             />
           </section>
 
-          {/* Expert, Metadata, Tags */}
-          <section className="flex md:flex-row md:mt-4 mt-16 flex-col items-center justify-between gap-8">
+          {/* Expert, Meta, Tags */}
+          <section className="flex flex-col md:flex-row gap-4 mb-6">
             <textarea
               rows={2}
               value={expert}
               onChange={(e) => setExpert(e.target.value)}
-              className="border border-gray-800 w-full p-2 rounded-lg outline outline-green-800"
+              className="w-full p-3 border border-gray-300 rounded-lg bg-white text-gray-900 focus:ring-2 focus:ring-green-500"
               placeholder="Expert (short summary)"
-            ></textarea>
+            />
             <textarea
               rows={2}
-              className="border border-gray-800 w-full p-2 rounded-lg outline outline-green-800"
+              className="w-full p-3 border border-gray-300 rounded-lg bg-white text-gray-900 focus:ring-2 focus:ring-green-500"
               placeholder="Meta data (optional)"
-            ></textarea>
+            />
             <textarea
               rows={2}
-              className="border border-gray-800 w-full p-2 rounded-lg outline outline-green-800"
+              className="w-full p-3 border border-gray-300 rounded-lg bg-white text-gray-900 focus:ring-2 focus:ring-green-500"
               placeholder="Tags (optional)"
-            ></textarea>
+            />
           </section>
 
-          <br />
           <button
             type="submit"
-            className="py-2 px-6 bg-blue-500 text-white rounded-lg"
+            className="w-full py-3 px-6  bg-gradient-to-r from-indigo-600 to-purple-800 transition-all duration-300 delay-150 text-white font-medium rounded-lg cursor-pointer hover:bg-gradient-to-r hover:from-purple-600 hover:to-indigo-800 hover:scale-105"
           >
             Create Post
           </button>

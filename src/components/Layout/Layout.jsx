@@ -18,24 +18,24 @@ const Layout = ({ children }) => {
     <div className="w-full h-screen flex flex-col overflow-hidden">
       <div className="flex flex-1 overflow-hidden">
         {/* Left Sidebar */}
-        <div className="w-[20%] md:block hidden bg-gray-800">
+        <div className="w-[20%] md:block hidden bg-gray-50">
           <LeftSide />
         </div>
 
         {/* Main Content Area */}
         <div className="md:w-[80%] w-full flex flex-col">
           {/* Sticky Topbar */}
-          <div className="bg-gray-800/90 h-12 w-full px-6 flex items-center justify-between sticky top-0 z-50 backdrop-blur-md shadow-sm">
+          <div className="bg-gray-50/90 h-12 w-full px-6 flex items-center justify-between sticky top-0 z-50 backdrop-blur-md shadow-sm">
             <div className="flex items-center gap-1">
-              <Link to="/" className="text-xl font-bold text-gray-100">
+              <Link to="/" className="text-xl font-bold text-gray-800">
                 {location.pathname === "/" ? "Dashboard" : "Home"}
               </Link>
               {location.pathname !== "/" && (
                 <>
-                  <span className="text-gray-400 text-xl">/</span>
+                  <span className="text-gray-900 text-xl">/</span>
                   <Link
                     to={location.pathname}
-                    className="text-xl font-bold capitalize text-gray-100"
+                    className="text-xl font-bold capitalize text-gray-900"
                   >
                     {location.pathname.replace("/", "").replace("-", " ")}
                   </Link>
@@ -58,7 +58,7 @@ const Layout = ({ children }) => {
 
         {/* Mobile Modal Sidebar */}
         <Modal open={open} onClose={handleClose} className="md:hidden">
-          <Box className="absolute top-0 left-0 w-64 h-full bg-gray-800 shadow-lg overflow-auto">
+          <Box className="absolute top-0 left-0 w-64 h-full bg-gray-50 shadow-lg overflow-auto">
             <div className="p-6">
               {menuList.map((item, index) => {
                 const isActive = item.path === location.pathname;

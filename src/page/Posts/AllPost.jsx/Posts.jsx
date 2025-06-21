@@ -36,7 +36,7 @@ const Posts = () => {
     <Layout>
       <section className="flex justify-end items-end my-4">
         <Link to={"/create-post"}>
-          <Button className="!bg-pink-700 hover:!bg-pink-500 !text-white">
+          <Button className=" !text-white !capitalize !bg-gradient-to-r !from-indigo-600 !to-purple-800">
             Create Blog
           </Button>
         </Link>

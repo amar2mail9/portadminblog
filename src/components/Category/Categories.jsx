@@ -67,7 +67,7 @@ const CategoryGrid = () => {
         <Link to={"/category/new"}>
           <button
             to="/category/new"
-            className="py-2 px-6 rounded-lg flex items-center gap-3 cursor-pointer hover:bg-gray-600 transition-all delay-200 ease-in-out bg-gray-700"
+            className="bg-gradient-to-r from-indigo-600 to-purple-800 text-white px-6 py-2 rounded-lg flex  items-center justify-center gap-3 hover:bg-gradient-to-r hover:from-purple-600 hover:to-indigo-800 cursor-pointer transition-all ease-in-out duration-300 delay-300 hover:shadow-2xl hover:shadow-black"
           >
             <FaPlus /> Add
           </button>

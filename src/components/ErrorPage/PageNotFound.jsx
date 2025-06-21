@@ -2,8 +2,8 @@ import React from 'react';
 
 const PageNotFound = () => {
     return (
-        <div className="w-full h-screen flex items-center justify-center bg-gray-900 text-white">
-            <div className="text-center p-6 rounded-lg bg-gray-800 shadow-lg max-w-md">
+        <div className="w-full h-screen flex items-center justify-center bg-gray-100 text-white">
+            <div className="text-center p-6 rounded-lg bg-gray-50 shadow-lg max-w-md">
                 {/* 404 Image */}
                 <div className="mb-6">
                     <img

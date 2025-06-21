@@ -1,6 +1,5 @@
-import React from "react";
+import React, { useState } from "react";
 import Layout from "../Layout/Layout";
-import { useState } from "react";
 import { toast } from "react-toastify";
 import Cookies from "js-cookie";
 import Spinner from "../Spinner";
@@ -14,7 +13,6 @@ export const CreateCategory = () => {
   const [isloading, setIsloading] = useState(false);
   const navigate = useNavigate();
 
-  //handel image upload
   const handleImageUpload = (event) => {
     const file = event.target.files[0];
     if (file) {
@@ -27,10 +25,6 @@ export const CreateCategory = () => {
         return;
       }
       setImage(file);
-      const reader = new FileReader();
-
-      reader.onload = () => {};
-      reader.readAsDataURL(file);
     }
   };
 
@@ -52,20 +46,20 @@ export const CreateCategory = () => {
 
       const data = await res.json();
       if (res.ok) {
-        toast.success(`${data.message || data.error || "Create Sucessfully"}`);
+        toast.success(`${data.message || "Created Successfully"}`);
         setCategoryName("");
         setDescription("");
         setImage(null);
         setIsPublished(false);
         setIsloading(false);
         navigate("/categories");
+      } else {
+        toast.error(`${data.message || "Failed"}`);
+        setIsloading(false);
       }
-      if (!res.ok) {
-        toast.error(`${data.message || data.error || "Failded"}`);
-      }
-      setIsloading(false);
     } catch (error) {
-      return toast.error(`ERR: ${error?.error || error.message}`);
+      toast.error(`ERR: ${error?.message || "Unknown error"}`);
+      setIsloading(false);
     }
   };
 
@@ -73,30 +67,34 @@ export const CreateCategory = () => {
     return (
       <Layout>
         <div className="">
-          <Spinner message="Adding Category...." />
+          <Spinner message="Adding Category..." />
         </div>
       </Layout>
     );
   }
+
   return (
     <Layout>
-      <div className="max-w-xl mx-auto p-6 bg-gray-900 border border-gray-700 rounded-lg shadow-md text-gray-100">
-        <h2 className="text-xl font-semibold mb-4">Create New Category</h2>
+      <div className="max-w-xl mx-auto p-6 bg-white border border-gray-200 rounded-lg shadow-md">
+        <h2 className="text-2xl font-semibold text-gray-800 mb-4">
+          Create New Category
+        </h2>
 
         {/* Category Name */}
         <div className="mb-4">
-          <label htmlFor="name" className="block text-sm font-medium mb-1">
+          <label
+            htmlFor="name"
+            className="block text-sm font-medium text-gray-700 mb-1"
+          >
             Category Name
           </label>
           <input
-            onChange={(e) => {
-              setCategoryName(e.target.value);
-            }}
+            onChange={(e) => setCategoryName(e.target.value)}
             value={categoryName}
             type="text"
             id="name"
             placeholder="Enter category name"
-            className="w-full px-4 py-2 border border-gray-600 rounded-lg bg-gray-800 text-gray-100 focus:outline-none focus:ring-2 focus:ring-Pink-500"
+            className="w-full px-4 py-2 border border-gray-300 rounded-lg bg-white text-gray-900 focus:outline-none focus:ring-2 focus:ring-pink-500"
           />
         </div>
 
@@ -104,57 +102,50 @@ export const CreateCategory = () => {
         <div className="mb-4">
           <label
             htmlFor="description"
-            className="block text-sm font-medium mb-1"
+            className="block text-sm font-medium text-gray-700 mb-1"
           >
             Description
           </label>
           <textarea
-            onChange={(e) => {
-              setDescription(e.target.value);
-            }}
+            onChange={(e) => setDescription(e.target.value)}
             value={description}
             id="description"
             rows="4"
             placeholder="Enter description"
-            className="w-full px-4 py-2 border border-gray-600 rounded-lg bg-gray-800 text-gray-100 focus:outline-none focus:ring-2 focus:ring-Pink-500"
+            className="w-full px-4 py-2 border border-gray-300 rounded-lg bg-white text-gray-900 focus:outline-none focus:ring-2 focus:ring-pink-500"
           ></textarea>
         </div>
 
         {/* Image Upload */}
         <div className="mb-4">
-          <label htmlFor="image" className="block text-sm font-medium mb-1">
+          <label
+            htmlFor="image"
+            className="block text-sm font-medium text-gray-700 mb-1"
+          >
             Upload Image
           </label>
           <input
             type="file"
             id="image"
-            onChange={() => {
-              handleImageUpload(event);
-            }}
-            className="block w-full text-sm text-gray-300 file:mr-4 file:py-2 file:px-4
+            onChange={handleImageUpload}
+            className="block w-full text-sm text-gray-700 file:mr-4 file:py-2 file:px-4
               file:rounded-lg file:border-0
               file:text-sm file:font-semibold
-              file:bg-Pink-950 file:text-Pink-400
-              hover:file:bg-Pink-800"
+              file:bg-pink-600 file:text-white
+              hover:file:bg-pink-700"
           />
         </div>
 
         {/* Is Published */}
         <div className="mb-6 flex items-center">
           <input
-            onChange={() => {
-              setIsPublished((prev) => {
-                const updated = !prev;
-                console.log(updated);
-                return updated;
-              });
-            }}
+            onChange={() => setIsPublished((prev) => !prev)}
             checked={isPublished}
             type="checkbox"
             id="published"
-            className="w-4 h-4 text-pink-600 bg-gray-700 border-gray-600 rounded focus:ring-Pink-500"
+            className="w-4 h-4 text-pink-600 border-gray-300 rounded focus:ring-pink-500"
           />
-          <label htmlFor="published" className="ml-2 text-sm">
+          <label htmlFor="published" className="ml-2 text-sm text-gray-800">
             {isPublished ? "Public" : "Private"}
           </label>
         </div>
@@ -173,4 +164,5 @@ export const CreateCategory = () => {
     </Layout>
   );
 };
+
 export default CreateCategory;

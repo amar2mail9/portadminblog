@@ -23,23 +23,29 @@
   background: #555;
   /* Darker color when hovering over the scrollbar */
 }
-
-/* Add in your global CSS or Tailwind layer if using custom styles */
+/* Add in your global CSS or Tailwind layer */
 .quill-editor .ql-toolbar {
-  background-color: #1f2937; /* Tailwind: bg-gray-800 */
-  border: none;
+  background-color: #f9fafb; /* Tailwind: bg-gray-100 */
+  border: 1px solid #d1d5db; /* Tailwind: border-gray-300 */
   border-radius: 0.5rem;
-  color: white;
+  color: #111827; /* Tailwind: text-gray-900 */
 }
 
 .quill-editor .ql-container {
-  background-color: #111827; /* Tailwind: bg-gray-900 */
-  color: white;
-  border: none;
-  border-radius: 0.5rem;
+  background-color: #ffffff; /* Tailwind: bg-white */
+  color: #111827; /* Tailwind: text-gray-900 */
+  border: 1px solid #d1d5db; /* Tailwind: border-gray-300 */
+  border-radius: 0 0 0.5rem 0.5rem;
 }
 
 .quill-editor .ql-editor {
   min-height: 18rem;
-  color: white;
+  color: #111827; /* Tailwind: text-gray-900 */
+  padding: 1rem; /* Add spacing for readability */
+}
+.quill-editor .ql-toolbar button:hover {
+  background-color: #e5e7eb; /* Tailwind: bg-gray-200 */
+}
+.quill-editor .ql-toolbar button.ql-active {
+  background-color: #d1d5db; /* Tailwind: bg-gray-300 */
 }

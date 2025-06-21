@@ -15,12 +15,12 @@ const LeftSide = () => {
   };
 
   return (
-    <div className="w-full h-full bg-gradient-to-b from-gray-800 to-gray-900">
+    <div className="w-full h-full bg-gradient-to-b from-gray-50 to-pink-100">
       {" "}
       {/* Gradient Background for sidebar */}
       {/* logo section */}
       <div className="text-center">
-        <h2 className={`text-2xl font-semibold capitalize p-5 text-gray-200`}>
+        <h2 className={`text-2xl font-semibold capitalize p-5 `}>
           Admin Panel
         </h2>
       </div>
@@ -33,10 +33,10 @@ const LeftSide = () => {
               <Link
                 to={item.path}
                 key={index}
-                className={`flex mb-2 items-center gap-2 py-2 px-4 text-white rounded-lg hover:bg-gradient-to-r hover:from-cyan-500 hover:to-blue-500 hover:text-white 
+                className={`flex mb-2 items-center gap-2 py-2 px-4  rounded-lg hover:bg-gradient-to-r hover:from-cyan-500 hover:to-blue-500 hover:text-white 
                   ${
                     isActive
-                      ? "bg-gradient-to-r from-pink-600 to-pink-800 text-white shadow-lg"
+                      ? "bg-gradient-to-r from-indigo-600 to-purple-800 text-white shadow-lg"
                       : "bg-transparent"
                   }`}
               >

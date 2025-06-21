@@ -26,7 +26,7 @@ const PreViewData = ({ slug }) => {
 
   return (
     <div>
-      <Box className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 min-w-sm max-w-xl bg-gray-900 border-2 border-gray-800 rounded-2xl shadow-2xl ">
+      <Box className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 min-w-sm max-w-xl bg-white  border-gray-800 rounded-2xl shadow-2xl ">
         {category === null ? (
           <Spinner message="feacthing Details...." />
         ) : (
@@ -37,7 +37,7 @@ const PreViewData = ({ slug }) => {
               image={category.featuredImage}
               title={category.categoryName}
             />
-            <Box className="p-2 overflow-y-scroll  max-h-56 scrollable-container">
+            <Box className="p-2 overflow-y-scroll  max-h-56 font-semibold scrollable-container">
               <Typography id="modal-modal-title" variant="h6" component="h2">
                 {category.categoryName}
               </Typography>
