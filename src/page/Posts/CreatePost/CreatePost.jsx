@@ -151,7 +151,7 @@ const CreatePost = () => {
           {/* Quill Editor */}
           <section className="mb-6">
             <Editor
-              apiKey="your-api-key"
+              apiKey="smrtcyde9tbyrgbhjtsg3lwa4nd7au94zlm5kz4s9dikuo8p"
               value={content}
               onEditorChange={(newContent) => setContent(newContent)}
               init={{
